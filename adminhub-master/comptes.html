@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Comptes - Admin</title>
+</head>
+<body>
+    <h1>Gestion des Comptes</h1>
+
+    <!-- Formulaire d'ajout de compte -->
+    <h2>Ajouter un Compte</h2>
+    <form action="ajouter_compte.php" method="post">
+        <label for="nom_utilisateur">Nom d'Utilisateur :</label>
+        <input type="text" id="nom_utilisateur" name="nom_utilisateur" required>
+        <label for="mot_de_passe">Mot de Passe :</label>
+        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <!-- Liste des comptes existants -->
+    <h2>Liste des Comptes</h2>
+    <ul>
+        <li>
+            Utilisateur 1
+            <a href="modifier_compte.php?id=1">Modifier</a>
+            <a href="supprimer_compte.php?id=1">Supprimer</a>
+        </li>
+        <li>
+            Utilisateur 2
+            <a href="modifier_compte.php?id=2">Modifier</a>
+            <a href="supprimer_compte.php?id=2">Supprimer</a>
+        </li>
+        <!-- Ajoutez d'autres comptes ici depuis la base de données -->
+    </ul>
+
+</body>
+</html>

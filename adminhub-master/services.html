@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>AdminHub</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Admin</span>
+		</a>
+		<ul class="side-menu top">
+			
+				
+		
+			
+		
+			
+				<li >
+				<a href="index.php">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Gérer les comptes</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="services.html">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Gérer les services</span>
+				</a>
+			</li>
+            <li>
+				<a href="profile_admin.php">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Profile</span>
+				</a>
+			</li>
+		</ul>
+		
+		
+		<ul class="side-menu">
+            <li>
+                <a href="logout.php" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Déconnecter</span>
+                </a>
+            </li>
+        </ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			
+			</form>
+			
+			
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+
+        <main>
+            <h1 style="color:#3C91E6;">Liste des services</h1>
+            <form id="ajouterserviceForm">
+                <div class="row g-3 align-items-center">
+               <div class="col">
+                <input class="form-control" type="text" id="type_services" placeholder="Type de service" required>
+               </div>
+                <div class="col">
+                <input class="form-control" type="text" id="Nom_de_service" placeholder="Nom de service" required>
+               </div>
+                <div class="col">
+                <input class="form-control" type="date" id="Date_début" pattern="\d{4}/\d{2}/\d{2}" placeholder="Date de début du service" required>
+                </div>
+                <div class="col">
+                <button class="btn btn-primary "type="submit">Ajouter service</button>
+            </div>
+            </form>
+    
+            <table id="services-table" border="1" class="table">
+                <thead class="table table-primary">
+                    <tr>
+                        <th>Type de service</th>
+                        <th>Nom de service</th>
+                        <th>Date de début du service</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table">
+                    <!-- Les données de la table seront insérées ici via AJAX -->
+                </tbody>
+            </table>
+    
+            <!-- Modals pour la modification et la suppression -->
+            <div id="modifierModal" style="display: none;">
+                <h2 style="color:#3C91E6;">Modifier service</h2>
+                <!-- <form id="modifierserviceForm">
+                    <div class="row g-1 align-items-center">
+                        <div class="col">
+                    <input class="form-control"  type="hidden" id="servicesId">
+                    </div>
+                    <div class="col">
+                    <input class="form-control"  type="text" id="type_servicesModif" placeholder="Type de service" required>
+                    </div>
+                    <div class="col">
+                    <input class="form-control"  type="text" id="Nom_de_serviceModif" placeholder="Nom de service" required>
+                     </div>
+                     <div class="col">
+                    <input class="form-control"  type="date" id="date_débutModif" pattern="\d{4}/\d{2}/\d{2}" placeholder="Date de début du service" required>
+                    <div class="col-12 form-buttons">
+                        <button class="btn btn-primary" type="submit">Valider</button>
+                        <button class="btn btn-secondary" type="button" id="annulerModification">Annuler</button>
+                    </div>
+                </form> -->
+                <form id="modifierserviceForm" class="row g-2 align-items-center">
+                    <input class="form-control" type="hidden" id="servicesId">
+                    
+                    <div class="col-auto">
+                        <input class="form-control" type="text" id="type_servicesModif" placeholder="Type de service" required>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <input class="form-control" type="text" id="Nom_de_serviceModif" placeholder="Nom de service" required>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <input class="form-control" type="date" id="date_débutModif" pattern="\d{4}/\d{2}/\d{2}" placeholder="Date de début du service" required>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <button class="btn btn-primary" type="submit">Valider</button>
+                        <button class="btn btn-secondary" type="button" id="annulerModification">Annuler</button>
+                    </div>
+                </form>
+                
+            </div>
+    
+            <div id="supprimerModal" style="display: none;">
+                <h2 style="color:#3C91E6;">Confirmer la Suppression</h2>
+                <p>Êtes-vous sûr de vouloir supprimer ce service ?</p>
+                <button class="btn btn-primary" type="button" id="confirmerSuppression">Confirmer</button>
+                <button class="btn btn-secondary" type="button" id="annulerSuppression">Annuler</button>
+            </div>
+        </main>
+    
+
+
+<script>
+   $(document).ready(function() {
+    // Fonction pour charger les services depuis la base de données
+    function chargerservice() {
+        $.ajax({
+            url: 'charger_service.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                var tbody = $('#services-table tbody');
+                tbody.empty();
+                $.each(data, function(index, services) {
+                    tbody.append('<tr>' +
+                        '<td>' + services.type_services + '</td>' +
+                        '<td>' + services.Nom_de_service + '</td>' +
+                        '<td>' + services.Date_début + '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-success modifier" data-id="' + services.id + '">Modifier</button>  &nbsp;' +
+                        '<button class="btn btn-danger supprimer" data-id="' + services.id + '">Supprimer</button>' +
+                        '</td>' +
+                        '</tr>');
+                });
+            },
+            error: function() {
+                alert('Une erreur s\'est produite lors du chargement des services.');
+            }
+        });
+    }
+
+    // Appeler la fonction pour charger les services au chargement de la page
+    chargerservice();
+
+    // Gestionnaire d'événements pour le formulaire d'ajout
+    $('#ajouterserviceForm').submit(function(event) {
+        event.preventDefault();
+
+        var type_services = $('#type_services').val();
+        var Nom_de_service = $('#Nom_de_service').val();
+        var Date_début = $('#Date_début').val();
+
+        $.ajax({
+            url: 'ajouter_service.php',
+            type: 'POST',
+            data: { type_services: type_services, Nom_de_service: Nom_de_service, Date_début: Date_début },
+            success: function(response) {
+                alert(response);
+                chargerservice();
+                $('#ajouterserviceForm')[0].reset();
+            },
+            error: function() {
+                alert('Une erreur s\'est produite lors de l\'ajout du service.');
+            }
+        });
+    });
+
+    // Gestionnaire d'événements pour les boutons "Modifier"
+    $(document).on('click', '.modifier', function() {
+        var servicesId = $(this).data('id');
+        var service = trouverservicerParId(servicesId);
+
+        $('#servicesId').val(servicesId);
+        $('#type_servicesModif').val(service.type_services);
+        $('#Nom_de_serviceModif').val(service.Nom_de_service);
+        $('#date_débutModif').val(service.Date_début);
+
+        $('#modifierModal').show();
+    });
+
+    // Gestionnaire d'événements pour le formulaire de modification
+    $('#modifierserviceForm').submit(function(event) {
+        event.preventDefault();
+
+        var Id = $('#servicesId').val();
+        var type_services = $('#type_servicesModif').val();
+        var Nom_de_service = $('#Nom_de_serviceModif').val();
+        var Date_début = $('#date_débutModif').val();
+
+        $.ajax({
+            url: 'modifier_service.php',
+            type: 'POST',
+            data: { id: Id, type_services: type_services, Nom_de_service: Nom_de_service, Date_début: Date_début },
+            success: function(response) {
+                alert(response);
+                chargerservice();
+                $('#modifierModal').hide();
+                $('#modifierserviceForm')[0].reset();
+            },
+            error: function() {
+                alert('Une erreur s\'est produite lors de la modification du service.');
+            }
+        });
+    });
+
+    // Gestionnaire d'événements pour les boutons "Supprimer"
+    $(document).on('click', '.supprimer', function() {
+        var servicesId = $(this).data('id');
+
+        $('#supprimerModal').show();
+
+        $('#confirmerSuppression').off('click').on('click', function() {
+            $.ajax({
+                url: 'supprimer_service.php',
+                type: 'POST',
+                data: { id: servicesId },
+                success: function(response) {
+                    alert(response);
+                    chargerservice();
+                    $('#supprimerModal').hide();
+                },
+                error: function() {
+                    alert('Une erreur s\'est produite lors de la suppression du service.');
+                }
+            });
+        });
+
+        $('#annulerSuppression').off('click').on('click', function() {
+            $('#supprimerModal').hide();
+        });
+    });
+
+    // Gestionnaire d'événements pour annuler la modification
+    $('#annulerModification').click(function() {
+        $('#modifierModal').hide();
+        $('#modifierserviceForm')[0].reset();
+    });
+
+    // Fonction pour trouver un service par son ID
+    function trouverservicerParId(servicesId) {
+        var service = {};
+        $.ajax({
+            url: 'charger_service_par_id.php',
+            type: 'GET',
+            dataType: 'json',
+            data: { id: servicesId },
+            async: false, // Synchroniser la requête
+            success: function(data) {
+                service = data;
+            },
+            error: function() {
+                alert('Une erreur s\'est produite lors de la récupération des données du service.');
+            }
+        });
+        return service;
+    }
+});
+
+    </script>
+        <script src="script.js"></script>
+</body>
+</html>
